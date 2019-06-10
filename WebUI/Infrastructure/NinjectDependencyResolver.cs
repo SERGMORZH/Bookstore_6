@@ -6,7 +6,7 @@ using Moq;
 using Ninject;
 using Domain.Abstract;
 using Domain.Entities;
-
+using Domain.Concrete;
 
 namespace WebUI.Infrastructure
 {
@@ -32,14 +32,16 @@ namespace WebUI.Infrastructure
 
         private void AddBindings()
         {
-            Mock<IBookRepository> mock = new Mock<IBookRepository>();
-            mock.Setup(m => m.Books).Returns(new List<Book>
+             Mock<IBookRepository> mock = new Mock<IBookRepository>();
+                mock.Setup(m => m.Books).Returns(new List<Book>
             {
-                new Book { Name = "Язык программирования", Author="Троелсен" , Price = 499 },
-                new Book { Name = "С#", Author="Уотсон" , Price = 149},
-                new Book { Name = "Асинхронное программирование", Author="Эелсен" , Price = 199 }
+                new Book { Name = "Язык программирования", Author="Троелсен" , Category= "Программирование", Price = 499m },
+                new Book { Name = "С#", Author="Уотсон", Category= "Программирование" , Price = 149m},
+                new Book { Name = "Асинхронное программирование", Category= "Программирование", Author="Эелсен" , Price = 199m }
             });
-            kernel.Bind<IBookRepository>().ToConstant(mock.Object);
+                kernel.Bind<IBookRepository>().ToConstant(mock.Object);
+            }
+            // kernel.Bind<IBookRepository>().To<EFBookRepository>();
         }
     }
-}
+
