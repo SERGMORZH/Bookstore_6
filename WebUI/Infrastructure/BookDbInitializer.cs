@@ -12,9 +12,13 @@ namespace WebUI.Infrastructure
     {
         protected override void Seed(BookContext db)
         {
-            new Book { Name = "Язык программирования", Author = "Троелсен", Price = 499m };
-            new Book { Name = "С#", Author = "Уотсон", Price = 149m };
-            new Book { Name = "Асинхронное программирование", Author = "Эелсен", Price = 199m };
+            IList<Book> defaultBooks = new List<Book>();
+
+            defaultBooks.Add(new Book { Name = "Язык программирования", Author = "Троелсен", Price = 499m });
+            defaultBooks.Add(new Book { Name = "С#", Author = "Уотсон", Price = 149m });
+            defaultBooks.Add(new Book { Name = "Асинхронное программирование", Author = "Эелсен", Price = 199m });
+
+            db.Books.AddRange(defaultBooks);
 
             base.Seed(db);
         }

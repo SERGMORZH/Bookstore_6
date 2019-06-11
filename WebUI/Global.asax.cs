@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
 using WebUI.Infrastructure;
+using Domain.Entities;
+using WebUI.Infrastructure.Binders;
 
 namespace WebUI
 {
@@ -13,10 +15,12 @@ namespace WebUI
     {
         protected void Application_Start()
         {
+            //System.Diagnostics.Debugger.Launch();
             Database.SetInitializer(new BookDbInitializer());
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }

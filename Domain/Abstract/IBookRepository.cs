@@ -10,5 +10,7 @@ namespace Domain.Abstract
     public interface IBookRepository
     {
         IEnumerable<Book> Books { get; }
+
+        List<Book> PagedBooks(int pageNumber);
     }
 }

@@ -12,6 +12,11 @@ namespace Domain.Concrete
         {
             get { return context.Books; }
         }
+
+        public List<Book> PagedBooks(int pageNumber)
+        {
+            return null;
+        }
     }
 }
 
