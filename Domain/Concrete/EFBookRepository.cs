@@ -16,6 +16,27 @@ namespace Domain.Concrete
         public List<Book> PagedBooks(int pageNumber)
         {
             return null;
+
+
+        }
+        public void SaveBook(Book book)
+        {
+            if (book.BookId == 0)
+                context.Books.Add(book);
+            else
+            {
+                Book dbEntry = context.Books.Find(book.BookId);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = book.Name;
+                    dbEntry.Author = book.Author;
+                    dbEntry.Description = book.Description;
+                    dbEntry.Price = book.Price;
+                    dbEntry.Category = book.Category;
+                }
+            }
+            context.SaveChanges();
+
         }
     }
 }

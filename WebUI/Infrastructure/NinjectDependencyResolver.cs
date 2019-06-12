@@ -42,9 +42,22 @@ namespace WebUI.Infrastructure
                 new Book { BookId=5,Name = "С++", Author="Смит", Category= "Программирование" , Price = 149m},
                 new Book { BookId=6,Name = "Война и мир",Author="Толстой", Category= "Классика", Price = 199m }
             });
+
                 kernel.Bind<IBookRepository>().ToConstant(mock.Object);
-            }
-            // kernel.Bind<IBookRepository>().To<EFBookRepository>();
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                   .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
+
         }
+        // kernel.Bind<IBookRepository>().To<EFBookRepository>();
+
+
+
+    }
     }
 

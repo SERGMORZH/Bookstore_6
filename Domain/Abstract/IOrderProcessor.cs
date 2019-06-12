@@ -7,11 +7,9 @@ using Domain.Entities;
 
 namespace Domain.Abstract
 {
-    public interface IBookRepository
+    public interface IOrderProcessor
     {
-        IEnumerable<Book> Books { get; }
-        void SaveBook(Book book);
-
-        List<Book> PagedBooks(int pageNumber);
+        void ProcessOrder(Cart cart, ShippingDetails shippingDetails);
     }
+
 }
