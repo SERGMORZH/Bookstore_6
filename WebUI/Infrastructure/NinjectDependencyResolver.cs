@@ -32,7 +32,7 @@ namespace WebUI.Infrastructure
 
         private void AddBindings()
         {
-             Mock<IBookRepository> mock = new Mock<IBookRepository>();
+            /* Mock<IBookRepository> mock = new Mock<IBookRepository>();
             mock.Setup(m => m.Books).Returns(new List<Book>
             {
                 new Book { BookId=1, Name = "Язык программирования", Author="Троелсен" , Category= "Программирование", Price = 499m },
@@ -43,18 +43,21 @@ namespace WebUI.Infrastructure
                 new Book { BookId=6,Name = "Война и мир",Author="Толстой", Category= "Классика", Price = 199m }
             });
 
-                kernel.Bind<IBookRepository>().ToConstant(mock.Object);
+                kernel.Bind<IBookRepository>().ToConstant(mock.Object);*/
+                kernel.Bind<IBookRepository>().To<EFBookRepository>();
+
             EmailSettings emailSettings = new EmailSettings
             {
                 WriteAsFile = bool.Parse(ConfigurationManager
                    .AppSettings["Email.WriteAsFile"] ?? "false")
+
             };
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
 
         }
-        // kernel.Bind<IBookRepository>().To<EFBookRepository>();
+         
 
 
 

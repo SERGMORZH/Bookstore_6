@@ -43,6 +43,11 @@ namespace WebUI.Controllers
                 return View(book);
             }
         }
+        public ViewResult Create()
+        {
+            return View("Edit", new Book());
+        }
+
 
     }
 }

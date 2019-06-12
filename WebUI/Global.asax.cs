@@ -16,7 +16,7 @@ namespace WebUI
         protected void Application_Start()
         {
             //System.Diagnostics.Debugger.Launch();
-            Database.SetInitializer(new BookDbInitializer());
+            //Database.SetInitializer(new BookDbInitializer());
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
